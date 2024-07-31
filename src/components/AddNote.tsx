@@ -107,7 +107,7 @@ const AddNote = () => {
         maxWidth="md"
         sx={{
           position: "absolute",
-          top: "50%",
+          top: "54%",
           left: "50%",
           transform: "translate(-50%, -50%)",
         }}
@@ -115,7 +115,7 @@ const AddNote = () => {
         <Card
           sx={{
             backgroundColor: "white",
-            height: "500px",
+            height: "550px",
             boxShadow: `0px 3px 6px ${mainColors.shadow}`,
           }}
         >
@@ -129,7 +129,12 @@ const AddNote = () => {
             }}
           />
           <Divider />
-          <Grid spacing={2} container sx={{ px: 4, pt: 3 }}>
+          <Grid
+            spacing={2}
+            container
+            sx={{ height: "90%", px: 4, pt: 3 }}
+            columns={{ xs: 4, sm: 8, md: 12 }}
+          >
             <Grid item xs={8}>
               <Input
                 sx={{
@@ -189,63 +194,74 @@ const AddNote = () => {
                 </FormHelperText>
               </Fade>
             </Grid>
-            <Grid item xs={4}>
-              <Autocomplete
-                options={["Home", "Work", "Personal"]}
-                sx={{
-                  "& .MuiAutocomplete-listbox": {
-                    color: "blue", // Change the font color of the suggestions
-                  },
-                  "& .MuiAutocomplete-option": {
-                    color: "red", // Change the font color of each option
-                  },
-                }}
-                renderInput={(params) => (
-                  <Input
-                    disableUnderline
-                    {...params.InputProps}
-                    inputProps={{
-                      ...params.inputProps,
-                      placeholder: "Select Category",
-                    }}
-                    sx={{
-                      width: "100%",
-                      backgroundColor: "#F4F4F4",
-                      px: 2,
-                      py: 1.5,
-                      borderRadius: "4px 4px 0px 0px",
-                      "& .MuiInputBase-input": {
-                        color: mainColors.font,
-                      },
-                      "& ::placeholder": {
-                        color: mainColors.font,
-                        opacity: 1,
-                      },
-                    }}
-                  />
-                )}
-                value={category}
-                onBlur={() => setCategoryError(!category)}
-                onFocus={() => setCategoryError(false)}
-                onChange={(event, newValue: string | null) => {
-                  setCategory(newValue || "")
-                }}
-              />
-              <Fade in={categoryError}>
-                <FormHelperText
-                  sx={{ color: "red", position: "absolute", ml: 2 }}
-                >
-                  Category is required
-                </FormHelperText>
-              </Fade>
+            <Grid
+              item
+              xs={4}
+              columns={{ xs: 6 }}
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+              }}
+            >
+              <Box>
+                <Autocomplete
+                  options={["Home", "Work", "Personal"]}
+                  sx={{
+                    "& .MuiAutocomplete-listbox": {
+                      color: "blue", // Change the font color of the suggestions
+                    },
+                    "& .MuiAutocomplete-option": {
+                      color: "red", // Change the font color of each option
+                    },
+                  }}
+                  renderInput={(params) => (
+                    <Input
+                      disableUnderline
+                      {...params.InputProps}
+                      inputProps={{
+                        ...params.inputProps,
+                        placeholder: "Select Category",
+                      }}
+                      sx={{
+                        width: "100%",
+                        backgroundColor: "#F4F4F4",
+                        px: 2,
+                        py: 1.5,
+                        borderRadius: "4px 4px 0px 0px",
+                        "& .MuiInputBase-input": {
+                          color: mainColors.font,
+                        },
+                        "& ::placeholder": {
+                          color: mainColors.font,
+                          opacity: 1,
+                        },
+                      }}
+                    />
+                  )}
+                  value={category}
+                  onBlur={() => setCategoryError(!category)}
+                  onFocus={() => setCategoryError(false)}
+                  onChange={(event, newValue: string | null) => {
+                    setCategory(newValue || "")
+                  }}
+                />
+                <Fade in={categoryError}>
+                  <FormHelperText
+                    sx={{ color: "red", position: "absolute", ml: 2 }}
+                  >
+                    Category is required
+                  </FormHelperText>
+                </Fade>
+              </Box>
+              <CardActions sx={{ justifyContent: "flex-end", pb: 2 }}>
+                <Button onClick={onClose}>cancel</Button>
+                <Button onClick={handleSubmit}>
+                  {existNote ? "Update" : "Add"}
+                </Button>
+              </CardActions>
             </Grid>
           </Grid>
-          <CardActions sx={{ justifyContent: "flex-end", p: 3, pr: 4 }}>
-            <Button onClick={onClose}>cancel</Button>
-            <Button onClick={handleSubmit}>
-              {existNote ? "Update" : "Add"}
-            </Button>
-          </CardActions>
         </Card>
       </Container>
     </>

@@ -63,7 +63,12 @@ const Buttons = ({ setCategory }: ButtonsProps) => {
   }
 
   return (
-    <Stack direction={"row"} mt={4}>
+    <Stack
+      mt={4}
+      direction={{ xs: "column", sm: "row" }}
+      justifyContent="space-between"
+      spacing={{ xs: 1, sm: 2, md: 4 }}
+    >
       <Stack direction={"row"} spacing={2}>
         <Button
           onClick={() => handleActive("all")}

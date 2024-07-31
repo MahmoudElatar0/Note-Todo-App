@@ -28,7 +28,6 @@ const App = () => {
   const filteredNotes = notes.filter((note) =>
     note.title.toLowerCase().includes(searchNote.toLowerCase())
   )
-  console.log(filteredNotes)
 
   const doneNumber = notes.filter((note) => note.done).length
   const notesLength = notes.length
@@ -60,8 +59,8 @@ const App = () => {
           }
         />
         <Buttons setCategory={setCategory} />
-        {notes.length === 0 || filteredNotes.length === 0 ? (
-          <NotFound type={notes.length === 0 ? "" : "search"} />
+        {notes.length === 0 ? (
+          <NotFound type={"home"} />
         ) : (
           <CardsContainer
             doneNumber={doneNumber}
